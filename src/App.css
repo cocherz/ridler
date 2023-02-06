@@ -1,38 +1,167 @@
-.App {
+@font-face {
+  font-family: "Nunito";   /*Can be any text*/
+  src: local("Nunito-Black"),
+    url("./Fonts/Nunito-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Nunito";   /*Can be any text*/
+  src: local("Nunito-Regular"),
+    url("./Fonts/Nunito-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Nunito";   /*Can be any text*/
+  src: local("Nunito-Bold"),
+    url("./Fonts/Nunito-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Nunito";   /*Can be any text*/
+  src: local("Nunito-Medium"),
+    url("./Fonts/Nunito-Medium.ttf") format("truetype");
+}
+
+
+:root {
+  --BG: #3D405B;
+  /* --incorrect: #FFFFFC; */
+  --close: #F4F1DE;
+  --correct:#81B29A;
+  --border: #F2CC8F;
+  --Keys: #E07A5F;
+}
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+body{
+  background-color: var(--BG);
+  font-family: Nunito;
+  color: #F4F1DE;
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+h1{
+text-align: center;
+line-height: 0;
+padding-top: 2rem;
+font-weight: 900;
+}
+h4{
+  text-align: center;
+  font-size: larger;
+  padding: 0 2rem 0 2rem;
+}
+.game{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.board {
+  padding: 2rem 2rem 0rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.line{
+  display: flex;
+  gap: 5px
+}
+
+.tile {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border);
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 4px;
+  color: var(--border);
+}
+
+.correct{
+  background-color: var(--correct);
+  color: var(--BG);
+}
+.close{
+  background-color: var(--close);
+  color: var(--BG);
+}
+.incorrect {
+  background-color: var(--incorrect);
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 0px); }
+  20% { transform: translate(-2px, 0px) ; }
+  40% { transform: translate(2px, 0px); }
+  60% { transform: translate(-2px, 0px) ; }
+  80% { transform: translate(2px, 0px) ; }
+  100% { transform: translate(0px, 0px) ; }
+}
+
+.keyboard{
+  position: absolute;
+  width: 100%;
+  bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.key{
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 3vh;
+  font-weight: 800;
+  height: 6vh;
+  width: 8.8vw;
+  margin: 2px;
+  background-color: var(--Keys);
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bigBtn{
+  width: 20vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.key:active{
+  background-color: #9d8df7;
+}
+.currentTile{
+  background-color: #9d8df7;
+}
+
+.flash{
+  animation: flash 1s ease-in-out infinite;
+  background: black;
+  background-color: var(--border);
+
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  50% {
+    opacity: 0.5;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
   }
 }

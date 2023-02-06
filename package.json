@@ -34,5 +34,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "netlify-cli": "^12.10.0"
+  },
+  "homepage": "."
 }

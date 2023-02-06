@@ -113,6 +113,9 @@ h4{
   100% { transform: translate(0px, 0px) ; }
 }
 
+
+
+
 .keyboard{
   position: absolute;
   width: 100%;
@@ -164,4 +167,15 @@ h4{
   100% {
     opacity: 1;
   }
+}
+
+.container{
+  background-color: #9d8df7;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  display: flex;
+  margin: 2rem;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
 }

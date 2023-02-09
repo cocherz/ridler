@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Share from "./share/share";
 
 import riddles from "./riddles.json";
 import "./App.css";
@@ -12,6 +12,7 @@ import "./Fonts/Nunito-Bold.ttf";
 function App() {
   const [solution, setSolution] = useState("");
   const [guesses, setGuesses] = useState(Array(3).fill(null));
+  const [correctKey, setCorrectKey ] = useState([])
   const [currentGuess, setCurrentGuess] = useState("");
   const [isGameOver, setIsGameOver] = useState(false);
   const [correct, setCorrect] = useState(false);
@@ -48,7 +49,6 @@ function App() {
     }
   }
   function handleType(event) {
-    console.log(startTime)
     if (guesses.filter(e => e !== null).length === guesses.length) {
       setIsGameOver(true);
       setNoGuessesLeft(true);
@@ -58,7 +58,7 @@ function App() {
       if (currentGuess.length !== solution.length) {
         return;
       } else {
-        guess();
+        guess()
       }
     }
     
@@ -79,9 +79,6 @@ function App() {
     if (currentGuess.length !== solution.length) {
       return;
     }
-    if (currentGuess.length === solution.length ) {
-      guess();
-    }
   }
 
   useEffect(() => {
@@ -100,7 +97,7 @@ function App() {
       {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guesses={guesses} /> : null}
       {isGameOver ? null 
       : <div>  
-      <Game guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
+      <Game correctKey={correctKey} setCorrectKey={setCorrectKey} guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
       <Riddle q={riddle.QUESTION} />
       <Keyboard handleType={handleType} /> 
       </div>
@@ -143,18 +140,21 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
   return <div className="line"> {tiles}</div>;
 }
 
+
+
+
 function Riddle({ q }) {
   return <h4> {q} </h4>;
 }
 
-function Game({ guesses, currentGuess, solution }) {
+function Game({ correctKey, guesses, currentGuess, solution, setCorrectKey }) {
   return (
     <section className="game">
       <div className="board">
         {guesses.map((guess, i) => {
           const isCurrentGuess = i === guesses.findIndex((val) => val == null);
           return (
-            <Line guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
+            <Line correctKey={correctKey} setCorrectKey={setCorrectKey} guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
           );
         })}
       </div>
@@ -163,7 +163,7 @@ function Game({ guesses, currentGuess, solution }) {
 }
 
 function Title() {
-  return <h1> GRIDL</h1>;
+  return <h1> RIDLr</h1>;
 }
 
 function Keyboard({ handleType }) {
@@ -181,7 +181,7 @@ function Keyboard({ handleType }) {
     <div className="keyboard">
       <section className="rowOne">
         {rowOneKeys.map((value) => (
-          <button className="key" key={value} value={value} id="key" onClick={test}>
+          <button className="key" key={value} value={value} id={value} onClick={test}>
             {value}
           </button>
         ))}
@@ -189,7 +189,7 @@ function Keyboard({ handleType }) {
 
       <section className="rowTwo">
         {rowTwoKeys.map((value) => (
-          <button className="key" key={value} value={value} onClick={test}>
+          <button className="key" key={value} value={value} id={value} onClick={test}>
             {value}
           </button>
         ))}
@@ -197,7 +197,7 @@ function Keyboard({ handleType }) {
 
       <section className="rowThree">
         {rowThreeKeys.map((value) => (
-          <button className="key" key={value} value={value} onClick={test}>
+          <button className="key" key={value} value={value} id={value} onClick={test}>
             {value}
           </button>
         ))}
@@ -219,8 +219,9 @@ function Complete ({solution, elapsedTime, guesses}) {
   return (
     <section className="container">
         <h2> Correct!</h2>
-        <h4> You got {solution} in {elapsedTime} seconds and {guesses.filter(e => e !== null).length} guesses</h4>
-        <p>Come back tomorrow for a new riddle. or share this with a mate or something...</p>
+        <h4> You got {solution.toUpperCase()} in {elapsedTime} seconds and {guesses.filter(e => e !== null).length} guesses</h4>
+        <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something...</p>
+        <Share /> 
       </section>
   )
 }
@@ -229,7 +230,8 @@ function Idiot() {
   return (
     <section className="container">
         <h2> Not today...</h2>
-        <p>Come back tomorrow for a new riddle. or share this with a mate or something...</p>
+        <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
+        <Share /> 
       </section>
   )
 }

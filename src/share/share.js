@@ -6,7 +6,7 @@ import BuyMeACoffeeLink from './bev';
 
 const Share = () => {
 
-  return (
+  return  (
     <div> 
     <section className='share-section'> 
         <TwitterShareLink /> 

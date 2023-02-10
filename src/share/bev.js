@@ -6,7 +6,7 @@ const BuyMeACoffeeLink = () => {
   return (
     <a href={buyMeACoffeeLink} target="_blank" rel="noopener noreferrer" className='bev'>
      <h4> 
-      Donate a 🍻
+      Sponser a 🍻
       </h4>
     </a>
   );

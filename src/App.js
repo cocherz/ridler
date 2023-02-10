@@ -21,32 +21,31 @@ function App() {
   const [elapsedTime, setElapsedTime] = useState(localStorage.getItem("elapsedTime") || 0);
   const [datePlayed, setDatePlayed] = useState(localStorage.getItem("datePlayed") || new Date().toISOString().slice(0, 10));
 
-useEffect(() => {
-  localStorage.setItem("guesses", JSON.stringify(guesses));
-  localStorage.setItem("isGameOver", JSON.stringify(isGameOver));
-  localStorage.setItem("correct", JSON.stringify(correct));
-  localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
-  localStorage.setItem("startTime", startTime);
-  localStorage.setItem("elapsedTime", elapsedTime);
-  localStorage.setItem("datePlayed", datePlayed);
-});
+  useEffect(() => {
+    localStorage.setItem("guesses", JSON.stringify(guesses));
+    localStorage.setItem("isGameOver", JSON.stringify(isGameOver));
+    localStorage.setItem("correct", JSON.stringify(correct));
+    localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
+    localStorage.setItem("startTime", startTime);
+    localStorage.setItem("elapsedTime", elapsedTime);
+    localStorage.setItem("datePlayed", datePlayed);
+  });
 
+  useEffect(() => {
+    if (datePlayed !== new Date().toISOString().slice(0, 10)) {
+      console.log("riddle != solution");
+      localStorage.clear();
+      window.location.reload();
+    }
+  });
 
-useEffect( () => {
-  if (datePlayed !== new Date().toISOString().slice(0, 10)) {
-    console.log('riddle != solution')
-    localStorage.clear()
-    window.location.reload()
-  }
-})
-
-
-  const handleElapsedTime = () =>   {
-      setElapsedTime((Date.now() - startTime) / 1000);
-  }
+  const handleElapsedTime = () => {
+    setElapsedTime((Date.now() - startTime) / 1000);
+  };
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
+    setDatePlayed(today);
     const currentRiddle = riddles.find((riddle) => riddle.DATE === today);
     setRiddle(currentRiddle);
     setSolution(currentRiddle.ANSWER.toLocaleLowerCase());
@@ -64,29 +63,29 @@ useEffect( () => {
     const isCorrect = solution === currentGuess;
     if (isCorrect) {
       setIsGameOver(true);
-      setCorrect(true)
-      handleElapsedTime()
+      setCorrect(true);
+      handleElapsedTime();
     }
   }
   function handleType(event) {
-    if (guesses.filter(e => e !== null).length === guesses.length) {
+    if (guesses.filter((e) => e !== null).length === guesses.length) {
       setIsGameOver(true);
       setNoGuessesLeft(true);
     }
-    
+
     if (event === "Enter") {
       if (currentGuess.length !== solution.length) {
         return;
       } else {
-        guess()
+        guess();
       }
     }
-    
+
     if (event === "Backspace") {
       setCurrentGuess(currentGuess.slice(0, -1));
       return;
     }
-    
+
     const isLetter = event.match(/^[a-z]{1}$/);
     if (isLetter) {
       setCurrentGuess((oldGuess) => oldGuess + event);
@@ -95,7 +94,7 @@ useEffect( () => {
     if (currentGuess.length === solution.length) {
       guess();
     }
- 
+
     if (currentGuess.length !== solution.length) {
       return;
     }
@@ -114,14 +113,18 @@ useEffect( () => {
   return (
     <div className="app">
       <Title />
-      {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guesses={guesses} /> : null}
-      {isGameOver ? null 
-      : <div>  
-      <Game guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
-      <Riddle q={riddle.QUESTION} />
-      <Keyboard handleType={handleType} /> 
-      </div>
-      }
+      {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
+      {isGameOver ? null : (
+        <div className="play">
+          <div>
+            <Game guesses={guesses} currentGuess={currentGuess} solution={solution} />
+            <Riddle q={riddle.QUESTION} />
+          </div>
+          <div>
+          <Keyboard handleType={handleType} />
+          </div>
+        </div>
+      )}
       {noGuessesLeft ? <Idiot /> : null}
     </div>
   );
@@ -161,10 +164,14 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
 }
 
 function Riddle({ q }) {
-  return <h4> {q} </h4>;
+  return (
+    <div className="riddle">
+      <span> {q} </span>
+    </div>
+  );
 }
 
-function Game({guesses, currentGuess, solution,  }) {
+function Game({ guesses, currentGuess, solution }) {
   return (
     <section className="game">
       <div className="board">
@@ -180,7 +187,7 @@ function Game({guesses, currentGuess, solution,  }) {
 }
 
 function Title() {
-  return <h1> RIDLr</h1>;
+  return <h1> RIDLr.</h1>;
 }
 
 function Keyboard({ handleType }) {
@@ -195,66 +202,65 @@ function Keyboard({ handleType }) {
 
   return (
     <div className="keyboardContainer">
-    <div className="keyboard">
-      <section className="rowOne">
-        {rowOneKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
-          </button>
-        ))}
-      </section>
+      <div className="keyboard">
+        <section className="rowOne">
+          {rowOneKeys.map((value) => (
+            <button className="key" key={value} value={value} id={value} onClick={test}>
+              {value.toLocaleUpperCase()}
+            </button>
+          ))}
+        </section>
 
-      <section className="rowTwo">
-        {rowTwoKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
-          </button>
-        ))}
-      </section>
+        <section className="rowTwo">
+          {rowTwoKeys.map((value) => (
+            <button className="key" key={value} value={value} id={value} onClick={test}>
+              {value.toLocaleUpperCase()}
+            </button>
+          ))}
+        </section>
 
-      <section className="rowThree">
-        {rowThreeKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
+        <section className="rowThree">
+          {rowThreeKeys.map((value) => (
+            <button className="key" key={value} value={value} id={value} onClick={test}>
+              {value.toLocaleUpperCase()}
+            </button>
+          ))}
+        </section>
+        <section className="rowFour">
+          <button className="key bigBtn" key="Backspace" value="Backspace" onClick={test}>
+            ❌
           </button>
-        ))}
-      </section>
-      <section className="rowFour">
-        <button className="key bigBtn" key="Backspace" value="Backspace" onClick={test}>
-          ❌
-        </button>
-        <button className="key bigBtn" key="enter" value="Enter" onClick={test}>
-          ✅
-        </button>
-      </section>
-    </div>
+          <button className="key bigBtn" key="enter" value="Enter" onClick={test}>
+            ✅
+          </button>
+        </section>
+      </div>
     </div>
   );
 }
 
-function Complete ({solution, elapsedTime, guesses}) {
+function Complete({ solution, elapsedTime, guessesCount }) {
   return (
     <section className="container">
-        <h2> Correct!</h2>
-        <h4> You got {solution.toUpperCase()} in {elapsedTime} seconds and {guesses.filter(e => e !== null).length} guesses</h4>
-        <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something...</p>
-        <Share /> 
-        <button onClick={() => localStorage.clear() +  window.location.reload()} > try again </button>
-      </section>
-  )
+      <h2> Correct!</h2>
+      <h4>
+        {" "}
+        You got '{solution.toUpperCase()}' in {Math.round(elapsedTime * 10) / 10} seconds and {guessesCount} {guessesCount > 1 ? 'guesses' : 'guess!'}
+      </h4>
+      <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something in the meantime...</p>
+      <Share />
+      <button onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
+    </section>
+  );
 }
 
 function Idiot() {
   return (
     <section className="container">
-        <h2> Not today...</h2>
-        <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
-        <Share /> 
-        <button onClick={() => localStorage.clear() + window.location.reload()}> try again </button>
-      </section>
-  )
+      <h2> Not today...</h2>
+      <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
+      <Share />
+      <button onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
+    </section>
+  );
 }
-// function handleClick() {
-//   localStorage.clear()
-//   window.location.reload()
-// }

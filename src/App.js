@@ -11,16 +11,36 @@ import "./Fonts/Nunito-Bold.ttf";
 
 function App() {
   const [solution, setSolution] = useState("");
-  const [guesses, setGuesses] = useState(Array(3).fill(null));
-  const [correctKey, setCorrectKey ] = useState([])
+  const [guesses, setGuesses] = useState(localStorage.getItem("guesses") ? JSON.parse(localStorage.getItem("guesses")) : Array(3).fill(null));
   const [currentGuess, setCurrentGuess] = useState("");
-  const [isGameOver, setIsGameOver] = useState(false);
-  const [correct, setCorrect] = useState(false);
-  const [noGuessesLeft, setNoGuessesLeft] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(localStorage.getItem("isGameOver") ? JSON.parse(localStorage.getItem("isGameOver")) : false);
+  const [correct, setCorrect] = useState(localStorage.getItem("correct") ? JSON.parse(localStorage.getItem("correct")) : false);
+  const [noGuessesLeft, setNoGuessesLeft] = useState(localStorage.getItem("noGuessesLeft") ? JSON.parse(localStorage.getItem("noGuessesLeft")) : false);
   const [riddle, setRiddle] = useState({});
-  const [startTime] = useState(Date.now());
-  const [elapsedTime, setElapsedTime] = useState(0);
+  const [startTime] = useState(localStorage.getItem("startTime") || Date.now());
+  const [elapsedTime, setElapsedTime] = useState(localStorage.getItem("elapsedTime") || 0);
 
+useEffect(() => {
+  localStorage.setItem("guesses", JSON.stringify(guesses));
+  localStorage.setItem("isGameOver", JSON.stringify(isGameOver));
+  localStorage.setItem("correct", JSON.stringify(correct));
+  localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
+  localStorage.setItem("startTime", startTime);
+  localStorage.setItem("elapsedTime", elapsedTime);
+});
+
+
+// useEffect( () => {
+//   const currentDate = new Date();
+//   const savedStartTime = new Date(startTime);
+//   console.log(currentDate.getDate(), savedStartTime.getDate());
+
+//   if (currentDate.getDate() !== savedStartTime.getDate()) {
+//     console.log(currentDate.getDate(), savedStartTime.getDate());
+//     localStorage.clear();
+//     window.location.reload();
+//   }
+// })
   const handleElapsedTime = () =>   {
       setElapsedTime((Date.now() - startTime) / 1000);
   }
@@ -97,7 +117,7 @@ function App() {
       {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guesses={guesses} /> : null}
       {isGameOver ? null 
       : <div>  
-      <Game correctKey={correctKey} setCorrectKey={setCorrectKey} guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
+      <Game guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
       <Riddle q={riddle.QUESTION} />
       <Keyboard handleType={handleType} /> 
       </div>
@@ -140,21 +160,18 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
   return <div className="line"> {tiles}</div>;
 }
 
-
-
-
 function Riddle({ q }) {
   return <h4> {q} </h4>;
 }
 
-function Game({ correctKey, guesses, currentGuess, solution, setCorrectKey }) {
+function Game({guesses, currentGuess, solution,  }) {
   return (
     <section className="game">
       <div className="board">
         {guesses.map((guess, i) => {
           const isCurrentGuess = i === guesses.findIndex((val) => val == null);
           return (
-            <Line correctKey={correctKey} setCorrectKey={setCorrectKey} guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
+            <Line guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
           );
         })}
       </div>
@@ -222,6 +239,7 @@ function Complete ({solution, elapsedTime, guesses}) {
         <h4> You got {solution.toUpperCase()} in {elapsedTime} seconds and {guesses.filter(e => e !== null).length} guesses</h4>
         <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something...</p>
         <Share /> 
+        <button onClick={() => localStorage.clear() +  window.location.reload()} > try again </button>
       </section>
   )
 }
@@ -232,6 +250,11 @@ function Idiot() {
         <h2> Not today...</h2>
         <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
         <Share /> 
+        <button onClick={() => localStorage.clear() + window.location.reload()}> try again </button>
       </section>
   )
 }
+// function handleClick() {
+//   localStorage.clear()
+//   window.location.reload()
+// }

@@ -19,6 +19,7 @@ function App() {
   const [riddle, setRiddle] = useState({});
   const [startTime] = useState(localStorage.getItem("startTime") || Date.now());
   const [elapsedTime, setElapsedTime] = useState(localStorage.getItem("elapsedTime") || 0);
+  const [datePlayed, setDatePlayed] = useState(localStorage.getItem("datePlayed") || new Date().toISOString().slice(0, 10));
 
 useEffect(() => {
   localStorage.setItem("guesses", JSON.stringify(guesses));
@@ -27,20 +28,19 @@ useEffect(() => {
   localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
   localStorage.setItem("startTime", startTime);
   localStorage.setItem("elapsedTime", elapsedTime);
+  localStorage.setItem("datePlayed", datePlayed);
 });
 
 
-// useEffect( () => {
-//   const currentDate = new Date();
-//   const savedStartTime = new Date(startTime);
-//   console.log(currentDate.getDate(), savedStartTime.getDate());
+useEffect( () => {
+  if (datePlayed !== new Date().toISOString().slice(0, 10)) {
+    console.log('riddle != solution')
+    localStorage.clear()
+    window.location.reload()
+  }
+})
 
-//   if (currentDate.getDate() !== savedStartTime.getDate()) {
-//     console.log(currentDate.getDate(), savedStartTime.getDate());
-//     localStorage.clear();
-//     window.location.reload();
-//   }
-// })
+
   const handleElapsedTime = () =>   {
       setElapsedTime((Date.now() - startTime) / 1000);
   }

@@ -168,8 +168,10 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
 
 function Riddle({ q }) {
   return (
-    <div className="riddle">
-      <span> {q} </span>
+    <div className="riddleContainer">
+      <div className="riddle">
+       <span className="riddleSpan"> {q} </span>
+      </div>
     </div>
   );
 }

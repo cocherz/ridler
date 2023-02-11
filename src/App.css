@@ -62,9 +62,16 @@ h4{
   font-size: larger;
 }
 
+.riddleContainer{
+  display: flex;
+  justify-content: center;
+}
+
 .riddle{
+  margin: auto;
   max-width: 420px;
   margin: 2rem;
+  text-align: center;
 }
 
 span{

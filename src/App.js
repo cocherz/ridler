@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import Share from "./share/share";
+import Header from "./Header/header";
+import Wrong from "./modals/wrong";
+import Correct from "./modals/correct";
 
 import riddles from "./riddles.json";
 import "./App.css";
@@ -30,6 +32,7 @@ function App() {
     localStorage.setItem("elapsedTime", elapsedTime);
     localStorage.setItem("datePlayed", datePlayed);
   });
+
 
   useEffect(() => {
     if (datePlayed !== new Date().toISOString().slice(0, 10)) {
@@ -112,8 +115,7 @@ function App() {
 
   return (
     <div className="app">
-      <Title />
-      {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
+      <Header />
       {isGameOver ? null : (
         <div className="play">
           <div>
@@ -125,7 +127,8 @@ function App() {
           </div>
         </div>
       )}
-      {noGuessesLeft ? <Idiot /> : null}
+      {correct ? <Correct elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
+      {noGuessesLeft ? <Wrong /> : null}
     </div>
   );
 }
@@ -186,10 +189,6 @@ function Game({ guesses, currentGuess, solution }) {
   );
 }
 
-function Title() {
-  return <h1> RIDLr.</h1>;
-}
-
 function Keyboard({ handleType }) {
   const test = (e) => {
     const { value } = e.target;
@@ -239,28 +238,5 @@ function Keyboard({ handleType }) {
   );
 }
 
-function Complete({ solution, elapsedTime, guessesCount }) {
-  return (
-    <section className="container">
-      <h2> Correct!</h2>
-      <h4>
-        {" "}
-        You got '{solution.toUpperCase()}' in {Math.round(elapsedTime * 10) / 10} seconds and {guessesCount} {guessesCount > 1 ? 'guesses' : 'guess!'}
-      </h4>
-      <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something in the meantime...</p>
-      <Share />
-      <button onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
-    </section>
-  );
-}
 
-function Idiot() {
-  return (
-    <section className="container">
-      <h2> Not today...</h2>
-      <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
-      <Share />
-      <button onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
-    </section>
-  );
-}
+

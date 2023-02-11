@@ -15,7 +15,7 @@ const Header = () => {
     <div className="header"> 
       <h1 className="title noPad"> RIDLr.</h1> 
         <div className="helpIcon"> 
-              <button className='' onClick={handleClick}>ℹ️</button>
+              <button className='large' onClick={handleClick}> ℹ️ </button>
         </div>
 
     </div>

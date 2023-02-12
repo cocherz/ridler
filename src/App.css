@@ -187,7 +187,7 @@ justify-content: center;
 
 .key{
   border-radius: 4px;
-  font-size: 3vh;
+  font-size: 25px;
   font-weight: 800;
   height: 60px;
   width: 9vw;
@@ -202,7 +202,7 @@ justify-content: center;
 
 
 .play{
-  height: 85vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -243,7 +243,7 @@ justify-content: center;
   border: 1px solid var(--border);
   border-radius: 1rem;
   display: flex;
-  margin: 2rem;
+  margin: 2rem; 
   flex-direction: column;
   align-items: center;
   padding: 2rem;
@@ -283,6 +283,7 @@ position: absolute;
 z-index: 2;
 left: 0;
 right: 0;
+margin-top: 2rem;
 }
 
 .helpSection{

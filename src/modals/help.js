@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const HelpModal = () => {
   return (
     <section className="container helpModal mw500">

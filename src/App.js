@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header/header";
 import Wrong from "./modals/wrong";
 import Correct from "./modals/correct";
+import gaEvent from "./ga4";
 
 import riddles from "./riddles.json";
 import "./App.css";
@@ -37,13 +38,6 @@ function App() {
     localStorage.setItem("datePlayed", datePlayed);
   });
 
- 
-  window.addEventListener("load",function() {
-    setTimeout(function(){
-        // This hides the address bar:
-        window.scrollTo(0, 1);
-    }, 0);
-});
 
   useEffect(() => {
     if (datePlayed !== new Date().toISOString().slice(0, 10)) {
@@ -76,6 +70,7 @@ function App() {
     setCurrentGuess("");
     const isCorrect = solution === currentGuess;
     if (isCorrect) {
+      gaEvent("End_game", "Correct", solution)
       setIsGameOver(true);
       setCorrect(true);
       handleElapsedTime();
@@ -85,6 +80,7 @@ function App() {
     if (guesses.filter((e) => e !== null).length === guesses.length) {
       setIsGameOver(true);
       setNoGuessesLeft(true);
+      gaEvent("End_game", "Incorrect", solution)
     }
 
     if (event === "Enter") {

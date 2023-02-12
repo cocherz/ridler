@@ -10,9 +10,10 @@ const Header = () => {
     } 
 
   return (
-    <section>
+    <section className="banner">
 
-    <div className="header"> 
+    <div className="header mw500 ma"> 
+
       <h1 className="title noPad"> RIDLr.</h1> 
         <div className="helpIcon"> 
               <button className='large' onClick={handleClick}> ℹ️ </button>
@@ -28,6 +29,7 @@ const Header = () => {
     )
      
  : null}
+
    </section>
     );
 };

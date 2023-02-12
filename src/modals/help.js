@@ -2,7 +2,7 @@ import React from "react";
 
 const HelpModal = () => {
   return (
-    <section className="container helpModal">
+    <section className="container helpModal mw500">
       <h2> How to play</h2>
       <div className="helpSection">
             <div className="helpRow">

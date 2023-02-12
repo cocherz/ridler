@@ -3,7 +3,7 @@ import Share from "../share/share";
 
 const Correct = ({ elapsedTime, guessesCount }) => {
   return (
-    <section className="container">
+    <section className="container mw500">
       <h2> Correct!</h2>
       <h4>
         You guessed correctly in {Math.round(elapsedTime * 10) / 10} seconds and {guessesCount} {guessesCount > 1 ? "guesses" : "guess!"}

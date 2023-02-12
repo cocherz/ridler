@@ -11,6 +11,10 @@ import "./Fonts/Nunito-Regular.ttf";
 import "./Fonts/Nunito-Medium.ttf";
 import "./Fonts/Nunito-Bold.ttf";
 
+
+
+
+
 function App() {
   const [solution, setSolution] = useState("");
   const [guesses, setGuesses] = useState(localStorage.getItem("guesses") ? JSON.parse(localStorage.getItem("guesses")) : Array(3).fill(null));
@@ -33,6 +37,13 @@ function App() {
     localStorage.setItem("datePlayed", datePlayed);
   });
 
+ 
+  window.addEventListener("load",function() {
+    setTimeout(function(){
+        // This hides the address bar:
+        window.scrollTo(0, 1);
+    }, 0);
+});
 
   useEffect(() => {
     if (datePlayed !== new Date().toISOString().slice(0, 10)) {
@@ -122,8 +133,8 @@ function App() {
             <Game guesses={guesses} currentGuess={currentGuess} solution={solution} />
             <Riddle q={riddle.QUESTION} />
           </div>
-          <div>
-          <Keyboard handleType={handleType} />
+          <div >
+          <Keyboard className="mw500" handleType={handleType} />
           </div>
         </div>
       )}
@@ -202,11 +213,11 @@ function Keyboard({ handleType }) {
   const rowThreeKeys = ["z", "x", "c", "v", "b", "n", "m"];
 
   return (
-    <div className="keyboardContainer">
+    <div className="keyboardContainer ">
       <div className="keyboard">
         <section className="rowOne">
           {rowOneKeys.map((value) => (
-            <button className="key" key={value} value={value} id={value} onClick={test}>
+            <button className="key letterKey" key={value} value={value} id={value} onClick={test}>
               {value.toLocaleUpperCase()}
             </button>
           ))}
@@ -214,24 +225,22 @@ function Keyboard({ handleType }) {
 
         <section className="rowTwo">
           {rowTwoKeys.map((value) => (
-            <button className="key" key={value} value={value} id={value} onClick={test}>
+            <button className="key letterKey" key={value} value={value} id={value} onClick={test}>
               {value.toLocaleUpperCase()}
             </button>
           ))}
         </section>
 
         <section className="rowThree">
+        <button className="key actionKey bigBtn" key="Backspace" value="Backspace" onClick={test}>
+            ❌
+          </button>
           {rowThreeKeys.map((value) => (
-            <button className="key" key={value} value={value} id={value} onClick={test}>
+            <button className="key letterKey" key={value} value={value} id={value} onClick={test}>
               {value.toLocaleUpperCase()}
             </button>
           ))}
-        </section>
-        <section className="rowFour">
-          <button className="key bigBtn" key="Backspace" value="Backspace" onClick={test}>
-            ❌
-          </button>
-          <button className="key bigBtn" key="enter" value="Enter" onClick={test}>
+          <button className="key actionKey bigBtn"  key="enter" value="Enter" onClick={test}>
             ✅
           </button>
         </section>

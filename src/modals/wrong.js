@@ -5,7 +5,7 @@ import Share from '../share/share';
 const Wrong = () => {
 
   return (
-    <section className="container">
+    <section className="container mw500">
           <h2> Not today...</h2>
           <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
           <Share />

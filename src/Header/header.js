@@ -4,14 +4,14 @@ import HelpModal from "../modals/help";
 
 const Header = () => {
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const [showScoreModal, setShowScoreModal] = useState(false)
+  // const [showScoreModal, setShowScoreModal] = useState(false)
 
   function changeHelpModal() {
     setShowHelpModal((showHelpModal) => !showHelpModal);
   }
-  function handleClick() {
-    setShowScoreModal((showScoreModal) => !showScoreModal);
-  }
+  // function handleClick() {
+  //   setShowScoreModal((showScoreModal) => !showScoreModal);
+  // }
 
   return (
     <section className="banner">

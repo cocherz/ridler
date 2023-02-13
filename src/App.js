@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactDOM from 'react-dom'
 import Header from "./Header/header";
 import Wrong from "./modals/wrong";
 import Correct from "./modals/correct";
@@ -18,7 +19,7 @@ import "./Fonts/Nunito-Bold.ttf";
 
 
 function App() {
-  const [solution, setSolution] = useState("");
+  const [solution, setSolution] = useState("h");
   const [guesses, setGuesses] = useState(localStorage.getItem("guesses") ? JSON.parse(localStorage.getItem("guesses")) : Array(3).fill(null));
   const [currentGuess, setCurrentGuess] = useState("");
   const [isGameOver, setIsGameOver] = useState(localStorage.getItem("isGameOver") ? JSON.parse(localStorage.getItem("isGameOver")) : false);
@@ -52,6 +53,7 @@ function App() {
     setElapsedTime((Date.now() - startTime) / 1000);
   };
 
+
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
     setDatePlayed(today);
@@ -64,6 +66,23 @@ function App() {
     handleType(e.key);
   }
 
+
+  async function handleWin() {
+
+    handleElapsedTime(); 
+    await new Promise(resolve => setTimeout(resolve, 700));
+    gaEvent("End_game", "Correct", solution)
+    setIsGameOver(true);
+    setCorrect(true);
+     
+  }
+
+
+
+
+
+
+
   function guess() {
     const newGuesses = [...guesses];
     newGuesses[guesses.findIndex((val) => val == null)] = currentGuess;
@@ -71,10 +90,7 @@ function App() {
     setCurrentGuess("");
     const isCorrect = solution === currentGuess;
     if (isCorrect) {
-      gaEvent("End_game", "Correct", solution)
-      setIsGameOver(true);
-      setCorrect(true);
-      handleElapsedTime();
+      handleWin()
     }
   }
   function handleType(event) {
@@ -124,7 +140,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {isGameOver ? null : (
+      {/* {isGameOver ? null : ( */}
         <div className="play">
           <div>
             <Game guesses={guesses} currentGuess={currentGuess} solution={solution} />
@@ -134,36 +150,45 @@ function App() {
           <Keyboard className="mw500" handleType={handleType} />
           </div>
         </div>
-      )}
-      {correct ? <Correct elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
-      {noGuessesLeft ? <Wrong /> : null}
+      {/* )} */}
+      {correct ? <Correct q={riddle.QUESTION}  elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
+      {noGuessesLeft ? <Wrong  q={riddle.QUESTION}  /> : null}
     </div>
   );
 }
 
 export default App;
 
-function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
+function Line({ className, guesses, row, guess, isFinal, solution, currentGuess }) {
   const tiles = [];
   for (let i = 0; i < solution.length; i++) {
     const char = guess[i];
 
     let className = `tile`;
 
+    
     if (isFinal) {
-      if (char === solution[i]) {
+      if(guess === solution){
+        className += " correct glow";
+      }
+      else if (char === solution[i]) {
+        setInterval(1000)
         className += " correct";
       } else if (solution.includes(char)) {
         className += " close shake";
       } else {
         className += " incorrect shake";
       }
+      
+    
     }
+
+
+
 
     if (currentGuess.length === i && row === guesses.filter((entry) => entry !== null).length) {
       className += " flash";
     }
-
     tiles.push(
       <div className={className} row={row} col={i} key={i}>
         {" "}
@@ -171,7 +196,7 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
       </div>
     );
   }
-  return <div className="line"> {tiles}</div>;
+  return <div className={`line ` +  className} > {tiles}</div>;
 }
 
 function Riddle({ q }) {
@@ -187,11 +212,11 @@ function Riddle({ q }) {
 function Game({ guesses, currentGuess, solution }) {
   return (
     <section className="game">
-      <div className="board">
+      <div className="board" id='board'>
         {guesses.map((guess, i) => {
           const isCurrentGuess = i === guesses.findIndex((val) => val == null);
           return (
-            <Line guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
+            <Line className={"row"+i} guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
           );
         })}
       </div>

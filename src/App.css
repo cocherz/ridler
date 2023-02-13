@@ -108,10 +108,10 @@ span{
 }
 
 .tile {
-  width: 50px;
-  height: 50px;
+  width: 43px;
+  height: 43px;
   border: 2px solid var(--Keys);
-  font-size: 35px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -247,6 +247,7 @@ justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  text-align: center;
 }
 
 .share-section{
@@ -281,9 +282,10 @@ a:visited {
 .helpModal{
 position: absolute;
 z-index: 2;
-left: 0;
-right: 0;
-margin-top: 2rem;
+top: 50%;
+left: 50%; 
+transform: translate(-50%, -50%);
+width: 70%;
 }
 
 .helpSection{
@@ -314,11 +316,12 @@ margin-top: 2rem;
 .backdrop{
   z-index: 0.9;
   position: absolute;
-  height: 100%;
+  height: 120%;
   width: 100%;
   background-color: black;
   opacity: 0.4;
   top: 0;
+  overflow: hidden;
 }
 
 .banner{
@@ -361,4 +364,46 @@ margin-top: 2rem;
 .menuOptions{
   display: flex;
   gap: 2rem;
+}
+
+.winner{
+  background-color: #9d8df7;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px var(--close);
+  }
+  to {
+    box-shadow: 0 0 20px 1px var(--correct);
+  }
+}
+
+.glow {
+  animation: glow 0.5s ease-in-out infinite alternate;
+}
+
+
+.correctStats{
+  display: flex;
+  gap: 40px;
+}
+
+.correctStats div{
+  text-align: center;
+  border-radius: 3px;
+  background-color: #30324828;
+}
+
+.correctStats div h5{
+  font-size: medium;
+  margin: 10px;
+}
+.correctStats div h4{
+  font-size: x-large;
+  padding: 0;
+  margin: 10px;
+}
+h2 {
+  margin: 0;
 }

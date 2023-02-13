@@ -11,8 +11,7 @@ const Correct = ({ elapsedTime, guessesCount, q }) => {
       
       <div className="correctStats">
         <div className="secondsContainer">
-          <h4>{Math.round(elapsedTime * 10) / 10}</h4>
-
+          <h4>{Math.round(elapsedTime * 10) / 10 }</h4>
           <h5>Seconds</h5>
         </div>
         <div className="guessesContainer">
@@ -22,7 +21,7 @@ const Correct = ({ elapsedTime, guessesCount, q }) => {
       </div>
       
       
-      <p className="center"> <strong> Come back tomorrow for a new riddle. <br/> <br/>  Share this with a mate... </strong></p>
+      <p className="center"> <strong> Come back tomorrow for a new riddle. <br/> <br/>  Share on social: </strong></p>
       <Share />
       <button onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
     </section>

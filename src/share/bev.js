@@ -6,9 +6,9 @@ const BuyMeACoffeeLink = () => {
 
   return (
     <a href={buyMeACoffeeLink} onClick={gaEvent("Share", "Donate_link", "clicked")} target="_blank" rel="noopener noreferrer" className='bev'>
-     <h4> 
+     <span className="smolTxt btn"> 
       Sponser a 🍻
-      </h4>
+      </span>
     </a>
   );
 };

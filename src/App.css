@@ -250,8 +250,12 @@ justify-content: center;
   text-align: center;
 }
 
+.container h2{
+  margin-top: 0;
+}
+
 .share-section{
-  padding-top: 20px;
+
   display: flex;
   justify-content: center;
   gap: 50px;
@@ -259,6 +263,11 @@ justify-content: center;
 
 .bev{
   color: #F4F1DE;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 10px;
 }
 
 .center{
@@ -386,11 +395,19 @@ width: 70%;
 
 .correctStats{
   display: flex;
-  gap: 40px;
+  flex-direction: column;
 }
 
 .correctStats div{
   text-align: center;
+  border-radius: 3px;
+  background-color: #30324828;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.back{
+  padding: 10px;
   border-radius: 3px;
   background-color: #30324828;
 }
@@ -405,10 +422,32 @@ width: 70%;
   margin: 10px;
 }
 h2 {
-  margin: 0;
+
 }
 
 .riddleSpan{
-  font-weight: 600;
+  font-weight: 500;
   line-height: 30px;
+}
+
+.largeTxt{
+  font-size:22px;
+}
+.b{
+  font-weight: 700;
+}
+.timeContainer{
+  padding: 10px;
+}
+.smolTxt{
+  font-size: medium;
+}
+
+.btn{
+  text-decoration: underline;
+}
+
+.lowMarg{
+  margin: 10px;
+  font-size: large;
 }

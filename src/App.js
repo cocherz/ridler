@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ReactDOM from 'react-dom'
 import Header from "./Header/header";
 import Wrong from "./modals/wrong";
 import Correct from "./modals/correct";
@@ -77,7 +76,18 @@ function App() {
      
   }
 
+  useEffect(() => {
+    if (guesses.filter((e) => e !== null).length === guesses.length) {
 
+      async function loss(){
+        await new Promise(resolve => setTimeout(resolve, 700));
+        setIsGameOver(true);
+        setNoGuessesLeft(true);
+        gaEvent("End_game", "Incorrect", solution)
+      }
+      loss()
+    }
+  }, [guesses, solution])
 
 
 
@@ -140,7 +150,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {/* {isGameOver ? null : ( */}
+     
         <div className="play">
           <div>
             <Game guesses={guesses} currentGuess={currentGuess} solution={solution} />
@@ -150,7 +160,7 @@ function App() {
           <Keyboard className="mw500" handleType={handleType} />
           </div>
         </div>
-      {/* )} */}
+
       {correct ? <Correct q={riddle.QUESTION}  elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
       {noGuessesLeft ? <Wrong  q={riddle.QUESTION}  /> : null}
     </div>

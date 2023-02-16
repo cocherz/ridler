@@ -1,10 +1,7 @@
 import React from "react";
 import Share from "../share/share";
-
-
-
-
-
+import TodaysRiddle from "./todaysRidle";
+import Score from "./score";
 
 const Correct = ({ elapsedTime, guessesCount, q }) => {
   function convertElapsedTime(elapsedTime) {
@@ -31,27 +28,10 @@ const Correct = ({ elapsedTime, guessesCount, q }) => {
     <div className="backdrop" />
     <section className="container helpModal mw500">
       <h2> Correct!</h2>
-      <h5 className="lowMarg" >Todays riddle:</h5>
-      <span className="center riddleSpan back"> {q} </span>
-      
-      <div className="correctStats">
-        <h5 className="lowMarg" >Your Score:</h5>
-        <div className="timeContainer">
-          <span className="largeTxt b">{hours}:{minutes}:{seconds}</span>.<span className="b">{milliseconds}</span>
-        </div>
-        <div className="guessesContainer">
-        <span className="largeTxt b">{guessesCount} </span><span className="b">{guessesCount > 1 ? "Guesses" : "Guess"}</span>
-        </div>  
-      
-      
-      
-      </div>     
-      
-
-
+      <TodaysRiddle q={q}/> 
+      <Score hours={hours} minutes={minutes} seconds={seconds} milliseconds={milliseconds} guessesCount={guessesCount}/>
       <Share />
     </section>
-    
     </div>
   );
 };

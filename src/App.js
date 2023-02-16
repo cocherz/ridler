@@ -77,7 +77,9 @@ function App() {
   }
 
   useEffect(() => {
-    if (guesses.filter((e) => e !== null).length === guesses.length) {
+    if (guesses.filter((e) => e !== null).length === guesses.length && correct === null) {
+
+      console.log(guesses.filter((e) => e !== null).length)
 
       async function loss(){
         await new Promise(resolve => setTimeout(resolve, 700));
@@ -87,7 +89,7 @@ function App() {
       }
       loss()
     }
-  }, [guesses, solution])
+  }, [correct, guesses, solution])
 
 
 
@@ -98,7 +100,10 @@ function App() {
     newGuesses[guesses.findIndex((val) => val == null)] = currentGuess;
     setGuesses(newGuesses);
     setCurrentGuess("");
+    
     const isCorrect = solution === currentGuess;
+
+
     if (isCorrect) {
       handleWin()
     }

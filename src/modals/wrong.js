@@ -1,6 +1,6 @@
 import React from 'react';
 import Share from '../share/share';
-
+import TodaysRiddle from './todaysRidle';
 
 const Wrong = ({q}) => {
 
@@ -9,7 +9,7 @@ const Wrong = ({q}) => {
     <div className="backdrop" />
     <section className="container helpModal mw500">
           <h2> Not today...</h2>
-          <span className="center riddleSpan"> Todays riddle: {q} </span>
+          <TodaysRiddle q={q} />
           <Share />
         </section>
         </div>

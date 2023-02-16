@@ -8,14 +8,14 @@ const Share = () => {
 
   return  (
     <div> 
-    <span className="center riddleSpan"> Come back tomorrow for a new riddle!</span>
-    <h5 className="lowMarg" >Share: </h5>
-    <section className='share-section'> 
+    <span className='b '> A new riddle tomorrow</span>
+    <p className='lowMarg b'>Share:</p>
+    <section className='share-section lowMarg'> 
         <TwitterShareLink /> 
         <WhatsAppShareLink />
         <EmailShareLink />
     </section>
-    <div className='bev'>
+    <div className='bev b'>
         <BuyMeACoffeeLink /> 
         <button  className="btn" onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
     </div>

@@ -4,6 +4,7 @@ import Wrong from "./modals/wrong";
 import Correct from "./modals/correct";
 import gaEvent from "./ga4";
 import Keyboard from "./keyboard";
+// import words from "./dict";
 
 import riddles from "./riddles.json";
 import "./App.css";
@@ -108,7 +109,11 @@ function App() {
       handleWin()
     }
   }
+
+
+
   function handleType(event) {
+    
     if (guesses.filter((e) => e !== null).length === guesses.length) {
       setIsGameOver(true);
       setNoGuessesLeft(true);
@@ -119,6 +124,8 @@ function App() {
       if (currentGuess.length !== solution.length) {
         return;
       } else {
+        // console.log(words[currentGuess.length],currentGuess, words[5].includes(currentGuess));
+
         guess();
       }
     }

@@ -8,7 +8,7 @@ const Share = () => {
 
   return  (
     <div> 
-    <span className='b '> A new riddle tomorrow</span>
+    <span className='b '> </span>
     <p className='lowMarg b'>Share:</p>
     <section className='share-section lowMarg'> 
         <TwitterShareLink /> 

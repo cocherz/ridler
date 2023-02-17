@@ -27,34 +27,15 @@
   --correct:#81B29A;
   --border: #F2CC8F;
   --Keys: #E07A5F;
-  --DarkBG: #30324828;
-  --borderRad: 5px;
 }
-html, body {
-  margin: 0; 
-  height: 100%;
-  }
-
-p {
-  margin: 0;
-}
+html, body {margin: 0; height: 100%; overflow: hidden}
 
 
-  html {
-    height: -webkit-fill-available;
-  }
 
 body{
-  display: flex; 
-  flex-direction: column;
-  margin: 0;
-  background-image: radial-gradient(circle, var(--BG), #303248);
-
   background-color: var(--BG);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Nunito;
   color: #F4F1DE;
-  height: 101vh;
-  min-height: -webkit-fill-avaliable;
 }
 
 button, input[type="submit"], input[type="reset"] {
@@ -76,26 +57,8 @@ font-weight: 900;
 h4{
   text-align: center;
   font-size: larger;
+  padding: 0 2rem 0 2rem;
 }
-
-.riddleContainer{
-  display: flex;
-  justify-content: center;
-}
-
-.riddle{
-  margin: auto;
-  max-width: 420px;
-  margin: 2rem;
-  text-align: center;
-}
-
-span{
-  margin: auto;
-  text-align: center;
-  font-size: larger;
-}
-
 .game{
   width: 100%;
   justify-content: center;
@@ -103,7 +66,7 @@ span{
 }
 
 .board {
-  padding-top: 2rem;
+  padding: 2rem 2rem 0rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -115,33 +78,25 @@ span{
 }
 
 .tile {
-  width: 43px;
-  height: 43px;
-  border: 2px solid var(--Keys);
-  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border);
+  font-size: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
   font-weight: 600;
-  border-radius: var(--borderRad);
-  color: var(--close);
-}
-
-.darkBG{
-  background-color: var(--BG);
+  border-radius: 4px;
+  color: var(--border);
 }
 
 .correct{
   background-color: var(--correct);
   color: var(--BG);
-  border: 2px solid var(--correct);
-
 }
 .close{
   background-color: var(--close);
-  border: 2px solid var(--close);
-
   color: var(--BG);
 }
 .incorrect {
@@ -160,61 +115,34 @@ span{
   100% { transform: translate(0px, 0px) ; }
 }
 
-.keyboardContainer{
-margin: auto;
-display: flex;
-align-items: center;
-justify-content: center;
 
-}
-.rowThree{
-  display: flex;
-}
+
 
 .keyboard{
-  height: 100%;
-  max-width: 420px;
+  position: absolute;
+  width: 100%;
+  bottom: 2vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  white-space:nowrap;
-}
-
-
-
-.letterKey{
-  max-width: 40px;
-}
-
-.actionKey{
-  max-width: 65px;
 }
 
 .key{
-  border-radius: var(--borderRad);
-  font-size: 25px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 3vh;
   font-weight: 800;
-  height: 60px;
-  width: 9vw;
-  padding: 5px;
+  height: 6vh;
+  width: 8.8vw;
   margin: 2px;
   background-color: var(--Keys);
   align-items: center;
   text-align: center;
-  flex-grow: 1;
-}
-
-
-
-.play{
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .bigBtn{
-  width: 13vw;
+  width: 20vw;
 }
 
 .key:active{
@@ -227,7 +155,7 @@ justify-content: center;
 .flash{
   animation: flash 1s ease-in-out infinite;
   background: black;
-  background-color: var(--Keys);
+  background-color: var(--border);
 }
 
 @keyframes flash {
@@ -246,33 +174,22 @@ justify-content: center;
 .container{
   background-color: #9d8df7;
   border: 1px solid var(--border);
-  border-radius: var(--borderRad);
+  border-radius: 1rem;
   display: flex;
-  margin: 2rem; 
+  margin: 2rem;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.container h2{
-  margin-top: 0;
+  padding: 2rem;
 }
 
 .share-section{
-  padding: 10px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   gap: 50px;
 }
-
 .bev{
   color: #F4F1DE;
-  display: flex;
-  gap: 50px;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 10px;
 }
 
 .center{
@@ -285,179 +202,4 @@ a:link {
 
 a:visited {
   text-decoration: none;
-}
-
-.mw500{
-  max-width: 500px;
-  margin: auto;
-}
-
-.helpModal{
-position: absolute;
-z-index: 2;
-top: 50%;
-left: 50%; 
-transform: translate(-50%, -50%);
-width: 80%;
-}
-
-.helpSection{
-  width: 100%;
-}
-
-.noShrink{
-  flex-shrink: 0;
-}
-
-.noPad{
-  padding: 0;
-  margin: auto;
-}
-
-.helpRow{
-  display: flex;
-  gap: 10px;
-
-  align-items: center;
-}
-.helpSection{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.backdrop{
-  z-index: 0.9;
-  position: absolute;
-  height: 120%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.4;
-  top: 0;
-  overflow: hidden;
-}
-
-.banner{
-  background-color: rgba(0, 0, 0, 0.149);
-}
-
-.ma{
-  margin: auto;
-}
-
-.header{
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.w500{
-  width: 500px;
-}
-
-.title{
-  margin: 2rem;
-  font-size: 30px
-}
-
-.noPadding{
-  padding: 0;
-  margin: 0; 
-}
-
-.helpIcon{
-  width: 100%;
-  text-align: right;
-  margin-right: 2rem;
-}
-.large{
-  font-size: x-large;
-}
-
-.menuOptions{
-  display: flex;
-  gap: 2rem;
-}
-
-.winner{
-  background-color: #9d8df7;
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px var(--close);
-  }
-  to {
-    box-shadow: 0 0 20px 1px var(--correct);
-  }
-}
-
-.glow {
-  animation: glow 0.5s ease-in-out infinite alternate;
-}
-
-
-.correctStats{
-  display: flex;
-  flex-direction: column;
-}
-
-.correctStats div{
-  border-radius: var(--borderRad);
-  background-color: var(--DarkBG);
-  padding: 10px;
-  margin-top: 10px;
-}
-
-.back{
-  padding: 10px;
-  border-radius: var(--borderRad);
-  background-color:var(--DarkBG);
-}
-
-
-
-.riddleSpan{
-  font-weight: 500;
-  line-height: 30px;
-}
-
-.largeTxt{
-  font-size:22px;
-}
-.b{
-  font-weight: 700;
-}
-.timeContainer{
-  padding: 10px;
-}
-.smolTxt{
-  font-size: medium;
-}
-
-.lh{
-  line-height: 130%;
-}
-
-.guessesContainer{
-  margin-bottom: 10px;
-}
-
-.lowMarg{
-  margin: 10px;
-}
-
-.tbLowMarg{
-  margin: 10px;
-}
-
-.focus{
-  background-color: var(--DarkBG);
-  padding: 10px;
-  border-radius: var(--borderRad);
-}
-
-.leftAlign{
-  text-align: left;
-  padding-left: 5px;
 }

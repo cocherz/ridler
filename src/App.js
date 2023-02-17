@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import Share from "./share/share";
+import Header from "./Header/header";
+import Wrong from "./modals/wrong";
+import Correct from "./modals/correct";
+import gaEvent from "./ga4";
+import Keyboard from "./keyboard";
+// import words from "./dict";
 
 import riddles from "./riddles.json";
 import "./App.css";
@@ -9,8 +14,12 @@ import "./Fonts/Nunito-Regular.ttf";
 import "./Fonts/Nunito-Medium.ttf";
 import "./Fonts/Nunito-Bold.ttf";
 
+
+
+
+
 function App() {
-  const [solution, setSolution] = useState("");
+  const [solution, setSolution] = useState("h");
   const [guesses, setGuesses] = useState(localStorage.getItem("guesses") ? JSON.parse(localStorage.getItem("guesses")) : Array(3).fill(null));
   const [currentGuess, setCurrentGuess] = useState("");
   const [isGameOver, setIsGameOver] = useState(localStorage.getItem("isGameOver") ? JSON.parse(localStorage.getItem("isGameOver")) : false);
@@ -19,34 +28,35 @@ function App() {
   const [riddle, setRiddle] = useState({});
   const [startTime] = useState(localStorage.getItem("startTime") || Date.now());
   const [elapsedTime, setElapsedTime] = useState(localStorage.getItem("elapsedTime") || 0);
+  const [datePlayed, setDatePlayed] = useState(localStorage.getItem("datePlayed") || new Date().toISOString().slice(0, 10));
 
-useEffect(() => {
-  localStorage.setItem("guesses", JSON.stringify(guesses));
-  localStorage.setItem("isGameOver", JSON.stringify(isGameOver));
-  localStorage.setItem("correct", JSON.stringify(correct));
-  localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
-  localStorage.setItem("startTime", startTime);
-  localStorage.setItem("elapsedTime", elapsedTime);
-});
+  useEffect(() => {
+    localStorage.setItem("guesses", JSON.stringify(guesses));
+    localStorage.setItem("isGameOver", JSON.stringify(isGameOver));
+    localStorage.setItem("correct", JSON.stringify(correct));
+    localStorage.setItem("noGuessesLeft", JSON.stringify(noGuessesLeft));
+    localStorage.setItem("startTime", startTime);
+    localStorage.setItem("elapsedTime", elapsedTime);
+    localStorage.setItem("datePlayed", datePlayed);
+  });
 
 
-// useEffect( () => {
-//   const currentDate = new Date();
-//   const savedStartTime = new Date(startTime);
-//   console.log(currentDate.getDate(), savedStartTime.getDate());
+  useEffect(() => {
+    if (datePlayed !== new Date().toISOString().slice(0, 10)) {
+      console.log("riddle != solution");
+      localStorage.clear();
+      window.location.reload();
+    }
+  });
 
-//   if (currentDate.getDate() !== savedStartTime.getDate()) {
-//     console.log(currentDate.getDate(), savedStartTime.getDate());
-//     localStorage.clear();
-//     window.location.reload();
-//   }
-// })
-  const handleElapsedTime = () =>   {
-      setElapsedTime((Date.now() - startTime) / 1000);
-  }
+  const handleElapsedTime = () => {
+    setElapsedTime((Date.now() - startTime) / 1000);
+  };
+
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
+    setDatePlayed(today);
     const currentRiddle = riddles.find((riddle) => riddle.DATE === today);
     setRiddle(currentRiddle);
     setSolution(currentRiddle.ANSWER.toLocaleLowerCase());
@@ -56,37 +66,74 @@ useEffect(() => {
     handleType(e.key);
   }
 
+
+  async function handleWin() {
+
+    handleElapsedTime(); 
+    await new Promise(resolve => setTimeout(resolve, 700));
+    gaEvent("End_game", "Correct", solution)
+    setIsGameOver(true);
+    setCorrect(true);
+     
+  }
+
+  useEffect(() => {
+    if (guesses.filter((e) => e !== null).length === guesses.length && correct === null) {
+
+
+      async function loss(){
+        await new Promise(resolve => setTimeout(resolve, 700));
+        setIsGameOver(true);
+        setNoGuessesLeft(true);
+        gaEvent("End_game", "Incorrect", solution)
+      }
+      loss()
+    }
+  }, [correct, guesses, solution])
+
+
+
+
+
   function guess() {
     const newGuesses = [...guesses];
     newGuesses[guesses.findIndex((val) => val == null)] = currentGuess;
     setGuesses(newGuesses);
     setCurrentGuess("");
+    
     const isCorrect = solution === currentGuess;
+
+
     if (isCorrect) {
-      setIsGameOver(true);
-      setCorrect(true)
-      handleElapsedTime()
+      handleWin()
     }
   }
+
+
+
   function handleType(event) {
-    if (guesses.filter(e => e !== null).length === guesses.length) {
+    
+    if (guesses.filter((e) => e !== null).length === guesses.length) {
       setIsGameOver(true);
       setNoGuessesLeft(true);
+      gaEvent("End_game", "Incorrect", solution)
     }
-    
+
     if (event === "Enter") {
       if (currentGuess.length !== solution.length) {
         return;
       } else {
-        guess()
+        // console.log(words[currentGuess.length],currentGuess, words[5].includes(currentGuess));
+
+        guess();
       }
     }
-    
+
     if (event === "Backspace") {
       setCurrentGuess(currentGuess.slice(0, -1));
       return;
     }
-    
+
     const isLetter = event.match(/^[a-z]{1}$/);
     if (isLetter) {
       setCurrentGuess((oldGuess) => oldGuess + event);
@@ -95,7 +142,7 @@ useEffect(() => {
     if (currentGuess.length === solution.length) {
       guess();
     }
- 
+
     if (currentGuess.length !== solution.length) {
       return;
     }
@@ -113,43 +160,56 @@ useEffect(() => {
 
   return (
     <div className="app">
-      <Title />
-      {correct ? <Complete solution={solution} elapsedTime={elapsedTime} guesses={guesses} /> : null}
-      {isGameOver ? null 
-      : <div>  
-      <Game guesses={guesses} currentGuess={currentGuess} solution={solution} /> 
-      <Riddle q={riddle.QUESTION} />
-      <Keyboard handleType={handleType} /> 
-      </div>
-      }
-      {noGuessesLeft ? <Idiot /> : null}
+      <Header />
+     
+        <div className="play">
+          <div>
+            <Game guesses={guesses} currentGuess={currentGuess} solution={solution} />
+            <Riddle q={riddle.QUESTION} />
+          </div>
+          <div >
+          <Keyboard className="mw500" handleType={handleType} />
+          </div>
+        </div>
+
+      {correct ? <Correct q={riddle.QUESTION}  elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
+      {noGuessesLeft ? <Wrong  q={riddle.QUESTION}  /> : null}
     </div>
   );
 }
 
 export default App;
 
-function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
+function Line({ className, guesses, row, guess, isFinal, solution, currentGuess }) {
   const tiles = [];
   for (let i = 0; i < solution.length; i++) {
     const char = guess[i];
 
     let className = `tile`;
 
+    
     if (isFinal) {
-      if (char === solution[i]) {
+      if(guess === solution){
+        className += " correct glow";
+      }
+      else if (char === solution[i]) {
+        setInterval(1000)
         className += " correct";
       } else if (solution.includes(char)) {
         className += " close shake";
       } else {
         className += " incorrect shake";
       }
+      
+    
     }
+
+
+
 
     if (currentGuess.length === i && row === guesses.filter((entry) => entry !== null).length) {
       className += " flash";
     }
-
     tiles.push(
       <div className={className} row={row} col={i} key={i}>
         {" "}
@@ -157,104 +217,30 @@ function Line({ guesses, row, guess, isFinal, solution, currentGuess }) {
       </div>
     );
   }
-  return <div className="line"> {tiles}</div>;
+  return <div className={`line ` +  className} > {tiles}</div>;
 }
 
 function Riddle({ q }) {
-  return <h4> {q} </h4>;
+  return (
+    <div className="riddleContainer">
+      <div className="riddle">
+       <span className="riddleSpan"> {q} </span>
+      </div>
+    </div>
+  );
 }
 
-function Game({guesses, currentGuess, solution,  }) {
+function Game({ guesses, currentGuess, solution }) {
   return (
     <section className="game">
-      <div className="board">
+      <div className="board" id='board'>
         {guesses.map((guess, i) => {
           const isCurrentGuess = i === guesses.findIndex((val) => val == null);
           return (
-            <Line guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
+            <Line className={"row"+i} guess={isCurrentGuess ? currentGuess : guess ?? ""} isFinal={!isCurrentGuess && guess != null} solution={solution} currentGuess={currentGuess} guesses={guesses} row={i} key={i} />
           );
         })}
       </div>
     </section>
   );
 }
-
-function Title() {
-  return <h1> RIDLr</h1>;
-}
-
-function Keyboard({ handleType }) {
-  const test = (e) => {
-    const { value } = e.target;
-    handleType(value);
-  };
-
-  const rowOneKeys = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
-  const rowTwoKeys = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
-  const rowThreeKeys = ["z", "x", "c", "v", "b", "n", "m"];
-
-  return (
-    <div className="keyboardContainer">
-    <div className="keyboard">
-      <section className="rowOne">
-        {rowOneKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
-          </button>
-        ))}
-      </section>
-
-      <section className="rowTwo">
-        {rowTwoKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
-          </button>
-        ))}
-      </section>
-
-      <section className="rowThree">
-        {rowThreeKeys.map((value) => (
-          <button className="key" key={value} value={value} id={value} onClick={test}>
-            {value}
-          </button>
-        ))}
-      </section>
-      <section className="rowFour">
-        <button className="key bigBtn" key="Backspace" value="Backspace" onClick={test}>
-          ❌
-        </button>
-        <button className="key bigBtn" key="enter" value="Enter" onClick={test}>
-          ✅
-        </button>
-      </section>
-    </div>
-    </div>
-  );
-}
-
-function Complete ({solution, elapsedTime, guesses}) {
-  return (
-    <section className="container">
-        <h2> Correct!</h2>
-        <h4> You got {solution.toUpperCase()} in {elapsedTime} seconds and {guesses.filter(e => e !== null).length} guesses</h4>
-        <p className="center">Come back tomorrow for a new riddle... or share this with a mate or something...</p>
-        <Share /> 
-        <button onClick={() => localStorage.clear() +  window.location.reload()} > try again </button>
-      </section>
-  )
-}
-
-function Idiot() {
-  return (
-    <section className="container">
-        <h2> Not today...</h2>
-        <p className="center">Come back tomorrow for a new riddle. or share this with a mate or something...</p>
-        <Share /> 
-        <button onClick={() => localStorage.clear() + window.location.reload()}> try again </button>
-      </section>
-  )
-}
-// function handleClick() {
-//   localStorage.clear()
-//   window.location.reload()
-// }

@@ -6,18 +6,18 @@ import BuyMeACoffeeLink from './bev';
 
 const Share = () => {
 
-
-
-
   return  (
     <div> 
-    <section className='share-section'> 
+    <span className='b '> </span>
+    <p className='lowMarg b'>Share:</p>
+    <section className='share-section lowMarg'> 
         <TwitterShareLink /> 
         <WhatsAppShareLink />
         <EmailShareLink />
     </section>
-    <div className='bev'>
+    <div className='bev b'>
         <BuyMeACoffeeLink /> 
+        <button  className="btn" onClick={() => localStorage.clear() + window.location.reload()}> Try again </button>
     </div>
     </div>
   );

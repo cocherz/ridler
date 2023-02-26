@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./Header/header";
+import Footer from "./Header/footer";
 import Wrong from "./modals/wrong";
 import Correct from "./modals/correct";
 import gaEvent from "./ga4";
@@ -26,7 +27,7 @@ function App() {
   const [correct, setCorrect] = useState(localStorage.getItem("correct") ? JSON.parse(localStorage.getItem("correct")) : false);
   const [noGuessesLeft, setNoGuessesLeft] = useState(localStorage.getItem("noGuessesLeft") ? JSON.parse(localStorage.getItem("noGuessesLeft")) : false);
   const [riddle, setRiddle] = useState({});
-  const [startTime] = useState(localStorage.getItem("startTime") || Date.now());
+  const [startTime, setStartTime] = useState(localStorage.getItem("startTime") || Date.now());
   const [elapsedTime, setElapsedTime] = useState(localStorage.getItem("elapsedTime") || 0);
   const [datePlayed, setDatePlayed] = useState(localStorage.getItem("datePlayed") || new Date().toISOString().slice(0, 10));
 
@@ -40,19 +41,27 @@ function App() {
     localStorage.setItem("datePlayed", datePlayed);
   });
 
+  const resetLocalStorage = () => {
+      setGuesses(Array(3).fill(null))
+      setIsGameOver(false)
+      setCorrect(false)
+      setNoGuessesLeft(false)
+      setDatePlayed(new Date().toISOString().slice(0, 10))
+      setStartTime(Date.now())
+  }
+
 
   useEffect(() => {
     if (datePlayed !== new Date().toISOString().slice(0, 10)) {
-      console.log("riddle != solution");
-      localStorage.clear();
-      window.location.reload();
+      console.log("riddle != solution")
+      resetLocalStorage()
     }
-  });
+  })
 
   const handleElapsedTime = () => {
     setElapsedTime((Date.now() - startTime) / 1000);
+    
   };
-
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
@@ -66,21 +75,16 @@ function App() {
     handleType(e.key);
   }
 
-
   async function handleWin() {
-
     handleElapsedTime(); 
     await new Promise(resolve => setTimeout(resolve, 700));
     gaEvent("End_game", "Correct", solution)
     setIsGameOver(true);
     setCorrect(true);
-     
   }
 
   useEffect(() => {
     if (guesses.filter((e) => e !== null).length === guesses.length && correct === null) {
-
-
       async function loss(){
         await new Promise(resolve => setTimeout(resolve, 700));
         setIsGameOver(true);
@@ -91,19 +95,12 @@ function App() {
     }
   }, [correct, guesses, solution])
 
-
-
-
-
   function guess() {
     const newGuesses = [...guesses];
     newGuesses[guesses.findIndex((val) => val == null)] = currentGuess;
     setGuesses(newGuesses);
-    setCurrentGuess("");
-    
+    setCurrentGuess("");    
     const isCorrect = solution === currentGuess;
-
-
     if (isCorrect) {
       handleWin()
     }
@@ -171,23 +168,19 @@ function App() {
           <Keyboard className="mw500" handleType={handleType} />
           </div>
         </div>
-
       {correct ? <Correct q={riddle.QUESTION}  elapsedTime={elapsedTime} guessesCount={guesses.filter((e) => e !== null).length} /> : null}
-      {noGuessesLeft ? <Wrong  q={riddle.QUESTION}  /> : null}
+      {noGuessesLeft ? <Wrong  q={riddle.QUESTION}  a={riddle.ANSWER}/> : null}
+      <Footer/>
     </div>
   );
 }
 
 export default App;
-
 function Line({ className, guesses, row, guess, isFinal, solution, currentGuess }) {
   const tiles = [];
   for (let i = 0; i < solution.length; i++) {
     const char = guess[i];
-
     let className = `tile`;
-
-    
     if (isFinal) {
       if(guess === solution){
         className += " correct glow";
@@ -200,13 +193,7 @@ function Line({ className, guesses, row, guess, isFinal, solution, currentGuess 
       } else {
         className += " incorrect shake";
       }
-      
-    
     }
-
-
-
-
     if (currentGuess.length === i && row === guesses.filter((entry) => entry !== null).length) {
       className += " flash";
     }

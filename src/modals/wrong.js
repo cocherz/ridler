@@ -1,8 +1,9 @@
 import React from 'react';
 import Share from '../share/share';
 import TodaysRiddle from './todaysRidle';
+import ShowAnswer from './showAnswer';
 
-const Wrong = ({q}) => {
+const Wrong = ({q, a}) => {
 
   return (
     <div> 
@@ -10,6 +11,7 @@ const Wrong = ({q}) => {
     <section className="container helpModal mw500">
           <h2> Not today...</h2>
           <TodaysRiddle q={q} />
+          <ShowAnswer a={a}/>
           <Share />
         </section>
         </div>

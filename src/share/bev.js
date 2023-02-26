@@ -5,11 +5,13 @@ const BuyMeACoffeeLink = () => {
   const buyMeACoffeeLink = `https://www.buymeacoffee.com/cochrz`;
 
   return (
-    <a href={buyMeACoffeeLink} onClick={gaEvent("Share", "Donate_link", "clicked")} target="_blank" rel="noopener noreferrer" className='bev'>
+    <button onClick={gaEvent("Share", "Donate_link", "clicked")}> 
+    <a href={buyMeACoffeeLink}  target="_blank" rel="noopener noreferrer" className='bev'>
      <span className="smolTxt btn"> 
       Sponsor a 🍻
       </span>
     </a>
+    </button>
   );
 };
 

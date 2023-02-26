@@ -6,7 +6,9 @@ const WhatsAppShareLink = () => {
   const whatsAppShareLink = `whatsapp://send?text=${message}`;
 
   return (
-    <a href={whatsAppShareLink} onClick={gaEvent("Share", "whatsapp", "clicked")} target="_blank" rel="noopener noreferrer" className='social'>
+    <button onClick={gaEvent("Share", "whatsapp", "clicked")}> 
+
+    <a href={whatsAppShareLink} target="_blank" rel="noopener noreferrer" className='social'>
       <svg
       fill="#F4F1DE"
       width="24" height="24"
@@ -42,6 +44,8 @@ const WhatsAppShareLink = () => {
         </g>
       </svg>
     </a>
+
+    </button>
   );
 };
 

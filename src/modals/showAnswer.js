@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-
+// import { withPlanetscale } from "@netlify/planetscale";
 
 const ShowAnswer = ({a}) => {
 const [showAnswer, setShowAnswer] = useState(false)
 
 
+
+
+
 const toggleAnswer = () => {
     setShowAnswer(true)
+    
     setTimeout(() => {
         setShowAnswer(false);
       }, 3000);
@@ -15,8 +19,10 @@ const toggleAnswer = () => {
 return (
         <button onClick={toggleAnswer} > 
         <p className="focus lh tbLowMarg b"> { showAnswer ? a : "Show answer"} </p> 
-
       </button>
     )
 }
 export default ShowAnswer;
+
+
+

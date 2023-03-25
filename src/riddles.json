@@ -1,1 +1,217 @@
-[{"DATE":"2023-03-21","QUESTION":"Naturally hairy, often wet. Searching for wood that I can get. What am I ?","ANSWER":"beaver"},{"DATE":"2023-03-22","QUESTION":"Four letters stand to make my name. Should 2 be taken, 4 remains. And should they take away 1 more, my meaning will be as before.","ANSWER":"Five"},{"DATE":"2023-03-23","QUESTION":"You can swallow me, but I can consume you too. What am I?","ANSWER":"Pride"},{"DATE":"2023-03-24","QUESTION":"We are 16 in total, but can never be a king, what are we? ","ANSWER":"Pawns"},{"DATE":"2023-03-25","QUESTION":"At half I am only some. When I'm full, people will turn my way. What am I?","ANSWER":"handsome"},{"DATE":"2023-03-26","QUESTION":"If you have it and you show it to other people, I’m gone. What am I?","ANSWER":"Secret"},{"DATE":"2023-03-27","QUESTION":"What spends all the time on the floor but never gets dirty?","ANSWER":"Shadow"},{"DATE":"2023-03-28","QUESTION":"What has four fingers and thumb, but it is not living?","ANSWER":"glove"},{"DATE":"2023-03-29","QUESTION":"What is it that no one wants, but no one wants to lose?","ANSWER":"lawsuit"},{"DATE":"2023-03-30","QUESTION":"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?","ANSWER":"map"},{"DATE":"2023-03-31","QUESTION":"What loses its head in the morning and gets it back at night?","ANSWER":"pillow"},{"DATE":"2023-04-01","QUESTION":"Naturally hairy, often wet. Searching for wood that I can get. What am I ?","ANSWER":"beaver"},{"DATE":"2023-04-02","QUESTION":"Four letters stand to make my name. Should 2 be taken, 4 remains. And should they take away 1 more, my meaning will be as before.","ANSWER":"Five"},{"DATE":"2023-04-03","QUESTION":"You can swallow me, but I can consume you too. What am I?","ANSWER":"Pride"},{"DATE":"2023-04-04","QUESTION":"We are 16 in total, but can never be a king, what are we? ","ANSWER":"Pawns"},{"DATE":"2023-04-05","QUESTION":"At half I am only some. When I'm full, people will turn my way. What am I?","ANSWER":"handsome"},{"DATE":"2023-04-06","QUESTION":"If you have it and you show it to other people, I’m gone. What am I?","ANSWER":"Secret"},{"DATE":"2023-04-07","QUESTION":"What spends all the time on the floor but never gets dirty?","ANSWER":"Shadow"},{"DATE":"2023-04-08","QUESTION":"What has four fingers and thumb, but it is not living?","ANSWER":"glove"},{"DATE":"2023-04-09","QUESTION":"What is it that no one wants, but no one wants to lose?","ANSWER":"lawsuit"},{"DATE":"2023-04-10","QUESTION":"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?","ANSWER":"map"},{"DATE":"2023-04-11","QUESTION":"What loses its head in the morning and gets it back at night?","ANSWER":"pillow"},{"DATE":"2023-04-12","QUESTION":"Naturally hairy, often wet. Searching for wood that I can get. What am I ?","ANSWER":"beaver"},{"DATE":"2023-04-13","QUESTION":"Four letters stand to make my name. Should 2 be taken, 4 remains. And should they take away 1 more, my meaning will be as before.","ANSWER":"Five"},{"DATE":"2023-04-14","QUESTION":"You can swallow me, but I can consume you too. What am I?","ANSWER":"Pride"},{"DATE":"2023-04-15","QUESTION":"We are 16 in total, but can never be a king, what are we? ","ANSWER":"Pawns"},{"DATE":"2023-04-16","QUESTION":"At half I am only some. When I'm full, people will turn my way. What am I?","ANSWER":"handsome"},{"DATE":"2023-04-17","QUESTION":"If you have it and you show it to other people, I’m gone. What am I?","ANSWER":"Secret"},{"DATE":"2023-04-18","QUESTION":"What spends all the time on the floor but never gets dirty?","ANSWER":"Shadow"},{"DATE":"2023-04-19","QUESTION":"What has four fingers and thumb, but it is not living?","ANSWER":"glove"},{"DATE":"2023-04-20","QUESTION":"What is it that no one wants, but no one wants to lose?","ANSWER":"lawsuit"},{"DATE":"2023-04-21","QUESTION":"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?","ANSWER":"map"},{"DATE":"2023-04-22","QUESTION":"What loses its head in the morning and gets it back at night?","ANSWER":"pillow"}]
+[
+    {
+        "DATE": "2023-03-21",
+        "QUESTION": "Naturally hairy, often wet. Searching for wood that I can get. What am I ?",
+        "ANSWER": "beaver"
+    },
+    {
+        "DATE": "2023-03-22",
+        "QUESTION": "Four letters stand to make my name. Should 2 be taken, 4 remains. And should they take away 1 more, my meaning will be as before.",
+        "ANSWER": "Five"
+    },
+    {
+        "DATE": "2023-03-23",
+        "QUESTION": "You can swallow me, but I can consume you too. What am I?",
+        "ANSWER": "Pride"
+    },
+    {
+        "DATE": "2023-03-24",
+        "QUESTION": "We are 16 in total, but can never be a king, what are we? ",
+        "ANSWER": "Pawns"
+    },
+    {
+        "DATE": "2023-03-25",
+        "QUESTION": " I wield power, yet I'm not a king; my influence spreads, but I have no wings. In me, you'll find wisdom, folly, and more; I'm passed between hands and through many doors. What am I?",
+        "ANSWER": "coin"
+    },
+    {
+        "DATE": "2023-03-26",
+        "QUESTION": " With no legs, I slither and slide; with no lungs, I breathe deep inside. A master of disguise, I can change my hue; I'm both predator and prey, to name just a few. What am I?",
+        "ANSWER": "octopus"
+    },
+    {
+        "DATE": "2023-03-27",
+        "QUESTION": " I dance in the night, but fade in the day; I'm never held captive, try as you may. An illusion of sorts, yet there's nothing to hold; I'm often pursued, but I'm never controlled. What am I?",
+        "ANSWER": " dream"
+    },
+    {
+        "DATE": "2023-03-28",
+        "QUESTION": " Though I have no heart, I can still pump; no legs, but I climb and jump. I'm always moving, never idle, and if you chase me, you'll be in a cycle. What am I?",
+        "ANSWER": " wave"
+    },
+    {
+        "DATE": "2023-03-29",
+        "QUESTION": " I come in pairs, yet I'm never the same; a crucial player in a complex game. You use me daily, yet seldom with care, and without me, your path would lead nowhere. What am I?",
+        "ANSWER": "glasses"
+    },
+    {
+        "DATE": "2023-03-30",
+        "QUESTION": " I bind and divide, yet I have no hands; I can mark the passing of life's many sands. Invisible, I hold strong, but one small tear can make me fall and disappear. What am I?",
+        "ANSWER": "memory"
+    },
+    {
+        "DATE": "2023-03-31",
+        "QUESTION": " In the darkness, I bring light, but not from the sun or moon's sight. I'm ancient and young, with no end or start; you'll find me in stories, poems, and art. What am I?",
+        "ANSWER": "fire"
+    },
+    {
+        "DATE": "2023-04-01",
+        "QUESTION": " I am your guard, your armor, your shield; with me by your side, you'll never yield. I'm always there, but seldom shown; my strength depends on you alone. What am I?",
+        "ANSWER": "Courage"
+    },
+    {
+        "DATE": "2023-04-02",
+        "QUESTION": " I'm not alive, but I can grow; I lack a mouth, yet I can flow. I can be tamed or run wild, and my form is often beguiled. What am I?",
+        "ANSWER": "river"
+    },
+    {
+        "DATE": "2023-04-03",
+        "QUESTION": " I can be vast and infinite or small and confined; I may hold treasures, secrets, and memories combined. I can be locked, but I have no key; only you can truly set me free. What am I?",
+        "ANSWER": "mind"
+    },
+    {
+        "DATE": "2023-04-04",
+        "QUESTION": "We are 16 in total, but can never be a king, what are we? ",
+        "ANSWER": "Pawns"
+    },
+    {
+        "DATE": "2023-04-05",
+        "QUESTION": "At half I am only some. When I'm full, people will turn my way. What am I?",
+        "ANSWER": "handsome"
+    },
+    {
+        "DATE": "2023-04-06",
+        "QUESTION": "If you have it and you show it to other people, I’m gone. What am I?",
+        "ANSWER": "Secret"
+    },
+    {
+        "DATE": "2023-04-07",
+        "QUESTION": "What spends all the time on the floor but never gets dirty?",
+        "ANSWER": "Shadow"
+    },
+    {
+        "DATE": "2023-04-08",
+        "QUESTION": "What has four fingers and thumb, but it is not living?",
+        "ANSWER": "glove"
+    },
+    {
+        "DATE": "2023-04-09",
+        "QUESTION": "What is it that no one wants, but no one wants to lose?",
+        "ANSWER": "lawsuit"
+    },
+    {
+        "DATE": "2023-04-10",
+        "QUESTION": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
+        "ANSWER": "map"
+    },
+    {
+        "DATE": "2023-04-11",
+        "QUESTION": "What loses its head in the morning and gets it back at night?",
+        "ANSWER": "pillow"
+    },
+    {
+        "DATE": "2023-04-12",
+        "QUESTION": "Naturally hairy, often wet. Searching for wood that I can get. What am I ?",
+        "ANSWER": "beaver"
+    },
+    {
+        "DATE": "2023-04-13",
+        "QUESTION": "Four letters stand to make my name. Should 2 be taken, 4 remains. And should they take away 1 more, my meaning will be as before.",
+        "ANSWER": "Five"
+    },
+    {
+        "DATE": "2023-04-14",
+        "QUESTION": "You can swallow me, but I can consume you too. What am I?",
+        "ANSWER": "Pride"
+    },
+    {
+        "DATE": "2023-04-15",
+        "QUESTION": "We are 16 in total, but can never be a king, what are we? ",
+        "ANSWER": "Pawns"
+    },
+    {
+        "DATE": "2023-04-16",
+        "QUESTION": "At half I am only some. When I'm full, people will turn my way. What am I?",
+        "ANSWER": "handsome"
+    },
+    {
+        "DATE": "2023-04-17",
+        "QUESTION": "If you have it and you show it to other people, I’m gone. What am I?",
+        "ANSWER": "Secret"
+    },
+    {
+        "DATE": "2023-04-18",
+        "QUESTION": "What spends all the time on the floor but never gets dirty?",
+        "ANSWER": "Shadow"
+    },
+    {
+        "DATE": "2023-04-19",
+        "QUESTION": "What has four fingers and thumb, but it is not living?",
+        "ANSWER": "glove"
+    },
+    {
+        "DATE": "2023-04-20",
+        "QUESTION": "What is it that no one wants, but no one wants to lose?",
+        "ANSWER": "lawsuit"
+    },
+    {
+        "DATE": "2023-04-21",
+        "QUESTION": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
+        "ANSWER": "map"
+    },
+    {
+        "DATE": "2023-04-22",
+        "QUESTION": "What loses its head in the morning and gets it back at night?",
+        "ANSWER": "pillow"
+    },
+    {
+        "DATE": "2023-04-23",
+        "QUESTION": " I wield power, yet I'm not a king; my influence spreads, but I have no wings. In me, you'll find wisdom, folly, and more; I'm passed between hands and through many doors. What am I?",
+        "ANSWER": "coin"
+    },
+    {
+        "DATE": "2023-04-24",
+        "QUESTION": " With no legs, I slither and slide; with no lungs, I breathe deep inside. A master of disguise, I can change my hue; I'm both predator and prey, to name just a few. What am I?",
+        "ANSWER": "octopus"
+    },
+    {
+        "DATE": "2023-04-25",
+        "QUESTION": " I dance in the night, but fade in the day; I'm never held captive, try as you may. An illusion of sorts, yet there's nothing to hold; I'm often pursued, but I'm never controlled. What am I?",
+        "ANSWER": " dream"
+    },
+    {
+        "DATE": "2023-04-26",
+        "QUESTION": " Though I have no heart, I can still pump; no legs, but I climb and jump. I'm always moving, never idle, and if you chase me, you'll be in a cycle. What am I?",
+        "ANSWER": " wave"
+    },
+    {
+        "DATE": "2023-04-27",
+        "QUESTION": " I come in pairs, yet I'm never the same; a crucial player in a complex game. You use me daily, yet seldom with care, and without me, your path would lead nowhere. What am I?",
+        "ANSWER": "glasses"
+    },
+    {
+        "DATE": "2023-04-28",
+        "QUESTION": " I bind and divide, yet I have no hands; I can mark the passing of life's many sands. Invisible, I hold strong, but one small tear can make me fall and disappear. What am I?",
+        "ANSWER": "memory"
+    },
+    {
+        "DATE": "2023-04-29",
+        "QUESTION": " In the darkness, I bring light, but not from the sun or moon's sight. I'm ancient and young, with no end or start; you'll find me in stories, poems, and art. What am I?",
+        "ANSWER": "fire"
+    },
+    {
+        "DATE": "2023-04-30",
+        "QUESTION": " I am your guard, your armor, your shield; with me by your side, you'll never yield. I'm always there, but seldom shown; my strength depends on you alone. What am I?",
+        "ANSWER": "Courage"
+    },
+    {
+        "DATE": "2023-05-01",
+        "QUESTION": " I'm not alive, but I can grow; I lack a mouth, yet I can flow. I can be tamed or run wild, and my form is often beguiled. What am I?",
+        "ANSWER": "river"
+    },
+    {
+        "DATE": "2023-05-02",
+        "QUESTION": " I can be vast and infinite or small and confined; I may hold treasures, secrets, and memories combined. I can be locked, but I have no key; only you can truly set me free. What am I?",
+        "ANSWER": "mind"
+    }
+]

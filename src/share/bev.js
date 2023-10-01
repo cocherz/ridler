@@ -8,7 +8,7 @@ const BuyMeACoffeeLink = () => {
     <button onClick={gaEvent("Share", "Donate_link", "clicked")}> 
     <a href={buyMeACoffeeLink}  target="_blank" rel="noopener noreferrer" className='bev'>
      <span className="smolTxt btn"> 
-      Sponsor a 🍻
+     ☕ Buy me a coffee ☕
       </span>
     </a>
     </button>
